@@ -99,6 +99,7 @@ export function createAdapter(_config: any) {
         insecureSkipVerify: config.insecureSkipVerify || true,
         withoutCookieJar: !config.withCookieJar,
         withDefaultCookieJar: config.withCookieJar,
+        withCustomCookieJar: false,
         isByteRequest: false,
         catchPanics: false,
         withDebug: false,

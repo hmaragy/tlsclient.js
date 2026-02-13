@@ -5,7 +5,7 @@ import { getTLSDependencyPath } from "./tlspath";
 
 let { TLS_LIB_PATH } = getTLSDependencyPath();
 
-let DEFAULT_CLIENT_ID = "chrome_120";
+let DEFAULT_CLIENT_ID = "chrome_146_PSK";
 let DEFAULT_HEADERS = {
   accept: "*/*",
   "accept-encoding": "gzip, deflate, br",

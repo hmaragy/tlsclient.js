@@ -41,7 +41,8 @@ let res = await axios.get("https://ipv4.icanhazip.com");
  * - `withRandomTLSExtensionOrder` - Randomize the order of tls extensions.
  * - `timeout` - Request timeout.
  * - `defaultHeaders` - Default headers to use. Usually the browser default headers.
- * - `headerOrder` - The order of the headers.
+ * - `withCookieJar` - Use Built-in cookieJar.
+ * - `sessionId` - Used along with cookiejar to preserve session.
  * @param {TLSClientConfiguration} config The configuration.
  *
  * @returns {AxiosInstance} The TLS client.

@@ -71,8 +71,8 @@ function settle(resolve: any, reject: any, response: any) {
         ],
         response.config,
         response.request,
-        response
-      )
+        response,
+      ),
     );
   }
 }
@@ -89,7 +89,7 @@ export function createAdapter(_config: any) {
           TLS_LIB_PATH,
         },
       },
-    }
+    },
   );
   return function (config: any) {
     return new Promise(async (resolve, reject) => {
@@ -97,8 +97,8 @@ export function createAdapter(_config: any) {
         tlsClientIdentifier: config.tlsClientIdentifier || DEFAULT_CLIENT_ID,
         followRedirects: config.followRedirects || false,
         insecureSkipVerify: config.insecureSkipVerify || true,
-        withoutCookieJar: true,
-        withDefaultCookieJar: false,
+        withoutCookieJar: !config.withCookieJar,
+        withDefaultCookieJar: config.withCookieJar,
         isByteRequest: false,
         catchPanics: false,
         withDebug: false,
@@ -106,7 +106,7 @@ export function createAdapter(_config: any) {
         withRandomTLSExtensionOrder: config.withRandomTLSExtensionOrder || true,
         timeoutSeconds: config.timeout / 1000 || 30,
         timeoutMilliseconds: 0,
-        sessionId: Date.now().toString(),
+        sessionId: config.sessionId,
         isRotatingProxy: false,
         proxyUrl: config.proxy || "",
         customTlsClient: config.customTlsClient || undefined,
@@ -124,7 +124,8 @@ export function createAdapter(_config: any) {
       const resJSON = JSON.parse(res);
       let resHeaders: any = {};
       Object.keys(resJSON.headers).forEach((key) => {
-        resHeaders[key] = resJSON.headers[key].length === 1
+        resHeaders[key] =
+          resJSON.headers[key].length === 1
             ? resJSON.headers[key][0]
             : resJSON.headers[key];
       });
@@ -138,7 +139,7 @@ export function createAdapter(_config: any) {
           responseURL: encodeURI(
             resJSON.headers && resJSON.headers.Location
               ? resJSON.headers.Location[0]
-              : resJSON.target
+              : resJSON.target,
           ),
         },
       };

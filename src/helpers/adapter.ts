@@ -95,7 +95,7 @@ export function createAdapter(_config: any) {
     return new Promise(async (resolve, reject) => {
       const requestPayload = {
         tlsClientIdentifier: config.tlsClientIdentifier || DEFAULT_CLIENT_ID,
-        followRedirects: config.followRedirects || false,
+        followRedirects: config.followRedirects == false ? false : true,
         insecureSkipVerify: config.insecureSkipVerify || true,
         withoutCookieJar: !config.withCookieJar,
         withDefaultCookieJar: config.withCookieJar,
@@ -113,10 +113,10 @@ export function createAdapter(_config: any) {
         customTlsClient: config.customTlsClient || undefined,
         certificatePinningHosts: {},
         headers: {
-          ...(config.defaultHeaders || DEFAULT_HEADERS),
+          ...(config.defaultHeaders || {}),
           ...config.headers,
         },
-        headerOrder: config.headerOrder || DEFAULT_HEADER_ORDER,
+        headerOrder: config.headerOrder || [],
         requestUrl: config.url,
         requestMethod: config.method.toUpperCase(),
         requestBody: config.data,

@@ -19,11 +19,11 @@ if (platform === "win32") {
   extension = "so";
 
   let releaseDetails = fs.readFileSync("/etc/os-release", "utf8");
-  const lines = releaseDetails.split("\n");
+  const lines = releaseDetails.trim().split("\n");
   const release = {};
-  lines.forEach((line, _) => {
+  lines.filter(Boolean).forEach((line, _) => {
     // Split the line into an array of words delimited by '='
-    const words = line.split("=");
+    const words = line.trim().split("=");
     release[words[0].trim().toLowerCase()] = words[1].trim();
   });
 

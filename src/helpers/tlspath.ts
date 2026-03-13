@@ -21,10 +21,10 @@ if (platform === "win32") {
   let releaseDetails = readFileSync("/etc/os-release", "utf8");
   const lines = releaseDetails.split("\n");
   const release: any = {};
-  lines.forEach((line, _) => {
+  lines.forEach((line: string, _: number) => {
     // Split the line into an array of words delimited by '='
     const words = line.split("=");
-    release[words[0].trim().toLowerCase()] = words[1].trim();
+    release[words[0].trim().toLowerCase()] = words[1]?.trim();
   });
 
   if (release.id.toLowerCase().includes("ubuntu")) {
@@ -36,6 +36,7 @@ if (platform === "win32") {
   }
 } else {
   console.error(`Unsupported platform: ${platform}`);
+  // @ts-ignore
   process.exit(1);
 }
 let _filename = `${filename}-${distribution}-${version}.${extension}`;

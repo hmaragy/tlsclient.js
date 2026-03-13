@@ -24,7 +24,8 @@ if (platform === "win32") {
   lines.filter(Boolean).forEach((line, _) => {
     // Split the line into an array of words delimited by '='
     const words = line.trim().split("=");
-    release[words[0].trim().toLowerCase()] = words[1].trim();
+
+    release[words[0].trim().toLowerCase()] = words[1]?.trim();
   });
 
   if (release.id.toLowerCase().includes("ubuntu")) {
